@@ -23,6 +23,8 @@
  */
 var APP_ID = 'amzn1.ask.skill.05d1e06d-e4c0-4d37-afec-ab841d45925e'; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
+var http = require('http');
+
 /**
  * The AlexaSkill prototype and helper functions
  */
@@ -37,6 +39,36 @@ var AlexaSkill = require('./AlexaSkill');
 var HelloWorld = function () {
     AlexaSkill.call(this, APP_ID);
 };
+
+// Function to make the initial request to our backend
+function initialLookup (searchTerm, priceLevel, distance, callback) {
+  var endpoint = 'http://blyndfoldme.herokuapp.com/api/random';
+
+  if (!distance || distance === undefined) {
+    distance = 5;
+  }
+
+  if (!priceLevel || priceLevel === undefined) {
+    priceLevel = 2;
+  }
+
+  var queryString = `?term=${searchTerm}&price=${priceLevel}&distance=${distance}`;
+
+  console.log(endpoint + queryString);
+
+  http.get(endpoint + queryString, function (res) {
+    var body = '';
+
+    res.on('data', function (data) {
+      body += data;
+    });
+
+    res.on('end', function () {
+      var parsed = JSON.parse(body);
+      return callback(parsed);
+    });
+  });
+}
 
 // Extend AlexaSkill
 HelloWorld.prototype = Object.create(AlexaSkill.prototype);
@@ -77,19 +109,26 @@ HelloWorld.prototype.intentHandlers = {
 
       var message;
 
-      if (categoySlotValue && costSlotValue) {
-        message = `Okay, I will find a place that has ${costSlotValue} ${categoySlotValue}`;
+      if (categoySlotValue !== undefined) {
+        message = `Okay, I found a place that has ${costSlotValue ? costSlotValue : ''} ${categoySlotValue}`;
     
         if (distanceSlotValue) {
           message += ` and is within ${distanceSlotValue} miles from you`;
         }
 
-        message += '.';
+        message += '!';
       } else {
         message = 'Sorry, I could not understand that. I can understand things such as: find me cheap tacos.';
       }
 
-      response.ask(message);
+      initialLookup(categoySlotValue, costSlotValue, distanceSlotValue, function (data) {
+        console.log('Callback me maybe');
+        console.log(data);
+
+        message += ` ${data.lyft.name} is ${data.lyft.eta} minutes away. Keep an eye out for their ${data.lyft.car}.`;
+
+        response.ask(message);
+      });
     }
 };
 

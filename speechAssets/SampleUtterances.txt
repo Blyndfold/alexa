@@ -1,8 +1,11 @@
-PickCategoryIntent i want {chinese food|Category} using LITERAL
-PickCategoryIntent i want {asian food|Category} using LITERAL
-PickCategoryIntent i want {fast food|Category} using LITERAL
-PickCategoryIntent i want {sesame chicken|Category} using LITERAL
-PickCategoryIntent i want {tacos|Category} using LITERAL
+OneshotEventIntent i want {chinese food|Category} using LITERAL
+OneshotEventIntent i want {asian food|Category} using LITERAL
+OneshotEventIntent i want {fast food|Category} using LITERAL
+OneshotEventIntent i want {sesame chicken|Category} using LITERAL
+OneshotEventIntent i want {tacos|Category} using LITERAL
+OneshotEventIntent i want {grilled cheese sandwich|Category} using LITERAL
+OneshotEventIntent i want {ham cheese sandwich|Category} using LITERAL
+OneshotEventIntent i want {filet mignon|Category} using LITERAL
 
 OneshotEventIntent i want {tacos|Category} that are {Cost}
 OneshotEventIntent i want {sesame chicken|Category} that are {Cost}
@@ -14,10 +17,14 @@ OneshotEventIntent i want {fried chicken|Category} that are {Cost}
 OneshotEventIntent i want {sushi|Category} that are {Cost}
 OneshotEventIntent i want {steak|Category} that are {Cost}
 
+OneshotEventIntent i want {Cost} {chicken soup|Category}
+OneshotEventIntent i want {Cost} {chicken soup|Category}
+
 OneshotEventIntent i want {Cost} {steak|Category}
 OneshotEventIntent i want {Cost} {chicken soup|Category}
 OneshotEventIntent i want {Cost} {tacos|Category} {Distance} miles from me
 OneshotEventIntent i want {Cost} {tacos|Category} that are {Distance} miles from me
 
-OneshotEventIntent i want {tacos|Category} that are {Cost} {Distance} miles from me
+OneshotEventIntent i want {tacos|Category} that is {Distance} miles from me
 OneshotEventIntent i want {tacos|Category} that are {Cost} within {Distance} miles from me
+OneshotEventIntent i want {tacos|Category} that is {Cost} within {Distance} miles from me
