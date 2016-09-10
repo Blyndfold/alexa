@@ -21,7 +21,7 @@
 /**
  * App ID for the skill
  */
-var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
+var APP_ID = 'amzn1.ask.skill.05d1e06d-e4c0-4d37-afec-ab841d45925e'; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -50,7 +50,7 @@ HelloWorld.prototype.eventHandlers.onSessionStarted = function (sessionStartedRe
 
 HelloWorld.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("HelloWorld onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to the Alexa Skills Kit, you can say hello";
+    var speechOutput = "Welcome to Blindfold, what do you want to do?";
     var repromptText = "You can say hello";
     response.ask(speechOutput, repromptText);
 };
@@ -63,17 +63,39 @@ HelloWorld.prototype.eventHandlers.onSessionEnded = function (sessionEndedReques
 
 HelloWorld.prototype.intentHandlers = {
     // register custom intent handlers
-    "HelloWorldIntent": function (intent, session, response) {
-        response.tellWithCard("Hello World!", "Hello World", "Hello World!");
-    },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can say hello to me!", "You can say hello to me!");
+      response.ask("You can say hello to me!", "You can say hello to me!");
+    },
+    "PickCategoryIntent": function (intent, session, response) {
+      var categoySlotValue = intent.slots.Category.value;
+      response.ask(`Okay, I will look for a place that has ${categoySlotValue}.`);
+    },
+    "OneshotEventIntent": function (intent, session, response) {
+      var categoySlotValue = intent.slots.Category.value;
+      var costSlotValue = intent.slots.Cost.value;
+      var distanceSlotValue = intent.slots.Distance.value;
+
+      var message;
+
+      if (categoySlotValue && costSlotValue) {
+        message = `Okay, I will find a place that has ${costSlotValue} ${categoySlotValue}`;
+    
+        if (distanceSlotValue) {
+          message += ` and is within ${distanceSlotValue} miles from you`;
+        }
+
+        message += '.';
+      } else {
+        message = 'Sorry, I could not understand that. I can understand things such as: find me cheap tacos.';
+      }
+
+      response.ask(message);
     }
 };
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
-    // Create an instance of the HelloWorld skill.
-    var helloWorld = new HelloWorld();
-    helloWorld.execute(event, context);
+  // Create an instance of the HelloWorld skill.
+  var helloWorld = new HelloWorld();
+  helloWorld.execute(event, context);
 };
