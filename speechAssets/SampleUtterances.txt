@@ -1,7 +1,23 @@
-HelloWorldIntent say hello
-HelloWorldIntent say hello world
-HelloWorldIntent hello
-HelloWorldIntent say hi
-HelloWorldIntent say hi world
-HelloWorldIntent hi
-HelloWorldIntent how are you
+PickCategoryIntent i want {chinese food|Category} using LITERAL
+PickCategoryIntent i want {asian food|Category} using LITERAL
+PickCategoryIntent i want {fast food|Category} using LITERAL
+PickCategoryIntent i want {sesame chicken|Category} using LITERAL
+PickCategoryIntent i want {tacos|Category} using LITERAL
+
+OneshotEventIntent i want {tacos|Category} that are {Cost}
+OneshotEventIntent i want {sesame chicken|Category} that are {Cost}
+OneshotEventIntent i want {fast food|Category} that are {Cost}
+OneshotEventIntent i want {chinese|Category} that are {Cost}
+OneshotEventIntent i want {sushi|Category} that are {Cost}
+OneshotEventIntent i want {bagels|Category} that are {Cost}
+OneshotEventIntent i want {fried chicken|Category} that are {Cost}
+OneshotEventIntent i want {sushi|Category} that are {Cost}
+OneshotEventIntent i want {steak|Category} that are {Cost}
+
+OneshotEventIntent i want {Cost} {steak|Category}
+OneshotEventIntent i want {Cost} {chicken soup|Category}
+OneshotEventIntent i want {Cost} {tacos|Category} {Distance} miles from me
+OneshotEventIntent i want {Cost} {tacos|Category} that are {Distance} miles from me
+
+OneshotEventIntent i want {tacos|Category} that are {Cost} {Distance} miles from me
+OneshotEventIntent i want {tacos|Category} that are {Cost} within {Distance} miles from me

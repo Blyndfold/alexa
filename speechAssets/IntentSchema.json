@@ -1,10 +1,50 @@
 {
   "intents": [
     {
-      "intent": "HelloWorldIntent"
+      "intent": "AMAZON.HelpIntent"
     },
     {
-      "intent": "AMAZON.HelpIntent"
+      "intent": "OneshotEventIntent",
+      "slots": [
+        {
+          "name": "Category",
+          "type": "AMAZON.LITERAL"
+        }, {
+          "name": "Cost",
+          "type": "LIST_OF_COSTS"
+        },
+        {
+          "name": "Distance",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "PickCategoryIntent",
+      "slots": [
+        {
+          "name": "Category",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "PickCostIntent",
+      "slots": [
+        {
+          "name": "Cost",
+          "type": "LIST_OF_COSTS"
+        }
+      ]      
+    },
+    {
+      "intent": "PickDistanceIntent",
+      "slots": [
+        {
+          "name": "Distance",
+          "type": "AMAZON.NUMBER"
+        }
+      ]      
     }
   ]
 }
